@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+externalMigrateFromAuthorizationDatabase/isMigrated=true
+migrateFromAuthorizationDatabase/isMigrated=true
+repositories/20fa0b67986200191ef0dd6088358aba=20fa0b67986200191ef0dd6088358aba;http\://hw2.huawei/svn/WRS/Trunk/wrs-service/pms;http\://hw2.huawei/svn/WRS/Trunk/wrs-service/pms;branches;tags;trunk;true;;;;false;;;0
