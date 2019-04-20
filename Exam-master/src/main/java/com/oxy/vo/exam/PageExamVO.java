@@ -20,6 +20,6 @@ public class PageExamVO extends BasePageVO{
 	/**
 	 * 班级下拉框传班级id
 	 */
-	private String classId; 
+	private Integer classId; 
 	
 }

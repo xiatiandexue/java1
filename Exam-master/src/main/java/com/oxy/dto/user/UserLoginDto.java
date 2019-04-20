@@ -1,6 +1,10 @@
 package com.oxy.dto.user;
 
+import lombok.Data;
+
+@Data
 public class UserLoginDto {
+	private Integer userid;
 	private String usercode;
 	private String name;
 	private String role;
@@ -23,8 +27,9 @@ public class UserLoginDto {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public UserLoginDto(String usercode, String name, String role) {
+	public UserLoginDto(String usercode, String name, String role, Integer userid) {
 		super();
+		this.userid = userid;
 		this.usercode = usercode;
 		this.name = name;
 		this.role = role;

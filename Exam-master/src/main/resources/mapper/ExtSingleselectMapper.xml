@@ -17,7 +17,7 @@
     	s.Difficulty as difficulty,
     	u.Name as createuser
     	From singleselect s
-        left  join user u on u.UserID=s.CreateUser
+        left  join user u on u.Name=s.CreateUser
     	<where>
     		<if test="param != null">
     			<if test="param.question != null and param.question != '' ">
