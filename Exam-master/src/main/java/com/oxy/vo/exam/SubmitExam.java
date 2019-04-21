@@ -24,7 +24,7 @@ public class SubmitExam {
 	 * 是否最终提交 (否-前端定时保存 )
 	 */
 	@NotNull
-	private Boolean isSumbit;
+	private Boolean isSubmit;
 	
 	@NotEmpty
 	private List<AnswerVO> answerList;

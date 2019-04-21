@@ -39,10 +39,11 @@ public class LoginController extends BaseController {
 		if (Strings.isNullOrEmpty(userLoginReq.getPassword())) {
 			return JsonResult2.fail("密码不能为空");
 		}
-		/*
-		 * if (Strings.isNullOrEmpty(userLoginReq.getRole())) { return
-		 * JsonResult2.fail("用户类型不能为空"); }
-		 */
+		
+		if (Strings.isNullOrEmpty(userLoginReq.getRole())) { 
+			return JsonResult2.fail("用户类型不能为空"); 
+		}
+		 
 		// 登录校验
 		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(userLoginReq.getUsercode(),

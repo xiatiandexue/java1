@@ -11,11 +11,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -27,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageHelper;
 import com.google.common.base.Objects;
 import com.oxy.config.CurrentUser;
 import com.oxy.constant.ExamConstant.QuestionType;
@@ -45,7 +41,6 @@ import com.oxy.vo.exam.PageGradeVO;
 import com.oxy.vo.exam.SubmitExam;
 
 /**
- * @author lil1
  * @date 2019年4月17日 上午10:28:00
  * @Description
  */
@@ -103,7 +98,7 @@ public class ExamServiceImpl implements ExamService {
 		}
 		extAnswerMapper.insertAnswer(listAnswer);
 		// 最终提交
-		if (vo.getIsSumbit()) {
+		if (vo.getIsSubmit()) {
 			scoreMapper.deleteByPrimaryKey(score);
 			score.setScore(singleSum + saqSum + "");
 			scoreMapper.insert(score);

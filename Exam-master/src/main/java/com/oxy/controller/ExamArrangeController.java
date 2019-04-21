@@ -27,7 +27,6 @@ import com.oxy.vo.exam.PageExamVO;
 import com.oxy.vo.exam.UpdateExamVO;
 
 /**
- * @author lil1
  * @date 2019年4月16日 上午10:26:16
  * @Description 考试安排
  */
