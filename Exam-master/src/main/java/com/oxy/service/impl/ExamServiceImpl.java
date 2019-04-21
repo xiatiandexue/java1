@@ -74,6 +74,7 @@ public class ExamServiceImpl implements ExamService {
 		score.setExamid(vo.getExamId());
 		score.setPaperid(vo.getPaperId());
 		score.setUsercode(CurrentUser.getCurrentUserCode());
+		score.setUserid(vo.getUserId());
 
 		for (AnswerVO ans : vo.getAnswerList()) {
 			UserAnswer answer = new UserAnswer();
@@ -84,7 +85,8 @@ public class ExamServiceImpl implements ExamService {
 			answer.setUseranswer(ans.getUserAnswer());
 			answer.setAnswer(ans.getAnswer());
 			answer.setIscorrrent(Objects.equal(ans.getAnswer(), ans.getUserAnswer()) ? true : false);
-			answer.setUsercode(CurrentUser.getCurrentUserCode());
+			answer.setUserid(vo.getUserId());
+			System.out.println(CurrentUser.getCurrentUserCode());
 			if (Objects.equal(ans.getAnswer(), ans.getUserAnswer())) {
 				if (QuestionType.SAQ.index.equals(ans.getType())) {
 					saqSum += ans.getValue();
@@ -187,7 +189,7 @@ public class ExamServiceImpl implements ExamService {
 
 	@Override
 	public List<LinkedHashMap<String, Object>> getGradePage(PageGradeVO vo, boolean isPage) {
-		List<LinkedHashMap<String, Object>> list = extAnswerMapper.getScoreList(vo,CurrentUser.getCurrentUserCode());
+		List<LinkedHashMap<String, Object>> list = extAnswerMapper.getScoreList(vo);
 		LOGGER.info("getGradePage(),resp{}", JSON.toJSONString(list));
 		return list;
 	}
@@ -201,7 +203,8 @@ public class ExamServiceImpl implements ExamService {
 		//获取single
 		List<LinkedHashMap<String, Object>> singleList = extAnswerMapper.getSingleList(examId,paperId,isAnalyze,QuestionType.SINGLE.index);
 		map.put("single", singleList);
-		
+		LinkedHashMap<String, Object> paperData = extAnswerMapper.getPaperData(examId, paperId);
+		map.put("paperData", paperData);
 		return map;
 	}
 

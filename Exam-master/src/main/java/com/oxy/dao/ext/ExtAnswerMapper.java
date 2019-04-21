@@ -17,12 +17,13 @@ public interface ExtAnswerMapper {
 
 	void insertAnswer(@Param("list")List<UserAnswer> listAnswer);
 
-	List<LinkedHashMap<String, Object>> getScoreList(@Param("vo")PageGradeVO vo, @Param("usercode")String usercode);
+	List<LinkedHashMap<String, Object>> getScoreList(@Param("vo")PageGradeVO vo);
 
 	List<LinkedHashMap<String, Object>> getSAQList(@Param("examId")Integer examId, @Param("paperId")Integer paperId,
 			@Param("analyze")boolean isAnalyze, @Param("type")String index);
 	
 	List<LinkedHashMap<String, Object>> getSingleList(@Param("examId")Integer examId, @Param("paperId")Integer paperId,
 			@Param("analyze")boolean isAnalyze, @Param("type")String index);
+	LinkedHashMap<String, Object> getPaperData(@Param("examId")Integer examId, @Param("paperId")Integer paperId);
 
 }

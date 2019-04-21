@@ -3,7 +3,6 @@ package com.oxy.vo.exam;
 import lombok.Data;
 
 /**
- * @author lil1
  * @date 2019年4月17日 上午11:24:55
  * @Description 
  */
