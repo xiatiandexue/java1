@@ -57,10 +57,11 @@ public class LoginController extends BaseController {
 			e.printStackTrace();
 			return JsonResult2.fail(e.getMessage());
 		}
-
+		
 		User sysUser = userService.login(userLoginReq.getUsercode(), userLoginReq.getPassword(), null);
 
 		CurrentUser.setCurrentUser(sysUser);
+		CurrentUser.getCurrentUserCode();
 		return JsonResult2.success(sysUser, "登录成功");
 
 		/*

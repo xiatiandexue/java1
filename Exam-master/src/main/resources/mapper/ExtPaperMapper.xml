@@ -17,7 +17,7 @@
     	e.Subject as subject,
     	u.Name as createuser
     	From examinationpaper e
-        left  join user u on u.UserID=e.CreateUser
+        left  join user u on u.UserCode=e.CreateUser
     	<where>
     		<if test="param != null">
     			<if test="param.subject != null and param.subject != '' ">

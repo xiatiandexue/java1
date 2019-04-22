@@ -32,6 +32,10 @@
     				<bind name="chapter" value="'%' + param.chapter + '%'"/>
     				and s.Chapter like #{chapter}
     			</if>
+    			<if test="param.createuser != null and param.createuser != '' ">
+    				<bind name="createuser" value="'%' + param.createuser + '%'"/>
+    				and CreateUser like #{createuser} 
+    			</if>
     		</if>
     	</where>
     	

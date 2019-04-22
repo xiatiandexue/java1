@@ -47,7 +47,7 @@ public class ShiroUserRealm extends AuthorizingRealm {
 		String password = new String(usernamePasswordToken.getPassword());
 		User sysUser = null;
 		try {
-			sysUser = sysUserService.login(account, password,null);
+			sysUser = sysUserService.login(account, password, null);
 		} catch (Exception e) {
 			throw new AuthenticationException(e.getMessage());
 		}
