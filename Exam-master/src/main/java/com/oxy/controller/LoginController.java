@@ -39,10 +39,11 @@ public class LoginController extends BaseController {
 		if (Strings.isNullOrEmpty(userLoginReq.getPassword())) {
 			return JsonResult2.fail("密码不能为空");
 		}
-		/*
-		 * if (Strings.isNullOrEmpty(userLoginReq.getRole())) { return
-		 * JsonResult2.fail("用户类型不能为空"); }
-		 */
+		
+		if (Strings.isNullOrEmpty(userLoginReq.getRole())) { 
+			return JsonResult2.fail("用户类型不能为空"); 
+		}
+		 
 		// 登录校验
 		try {
 			UsernamePasswordToken token = new UsernamePasswordToken(userLoginReq.getUsercode(),
@@ -56,10 +57,11 @@ public class LoginController extends BaseController {
 			e.printStackTrace();
 			return JsonResult2.fail(e.getMessage());
 		}
-
+		
 		User sysUser = userService.login(userLoginReq.getUsercode(), userLoginReq.getPassword(), null);
 
 		CurrentUser.setCurrentUser(sysUser);
+		CurrentUser.getCurrentUserCode();
 		return JsonResult2.success(sysUser, "登录成功");
 
 		/*

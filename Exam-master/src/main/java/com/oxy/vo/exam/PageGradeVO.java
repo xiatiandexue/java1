@@ -17,6 +17,7 @@ public class PageGradeVO extends BasePageVO{
 	private String examName;
 	private String paperName;
 	private String subject;
+	private Integer userId;
 	/**
 	 * 学生只能查看自己的成绩
 	 */

@@ -49,12 +49,12 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 	@Override
-	public User login(String usercode, String password, String role) {
+	public User login(String usercode, String password,String role) {
 		UserExample example = new UserExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andUsercodeEqualTo(usercode);
 		criteria.andPasswordEqualTo(password);
-		// criteria.andRoleEqualTo(role);
+//		criteria.andRoleEqualTo(role);
 		List<User> list = userMapper.selectByExample(example);
 		if (list != null && list.size() > 0) {
 			User user = list.get(0);

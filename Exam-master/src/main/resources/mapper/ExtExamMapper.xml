@@ -33,8 +33,10 @@
             <if test="vo.createName !=null and vo.createName !=''">
                and  u.Name like concat('%',#{vo.createName},'%')
             </if>
-            <if test="vo.classId !=null">
-               and u.classId= #{vo.classId}
+            <if test="vo.classId !=null and vo.classId !=''">
+               <![CDATA[
+               and JSON_CONTAINS(e.classids->'$[*]', '"${vo.classId}"', '$')
+               ]]>
             </if>
             <if test="vo.status !=null and vo.status !=''">
                and e.status=#{vo.status}

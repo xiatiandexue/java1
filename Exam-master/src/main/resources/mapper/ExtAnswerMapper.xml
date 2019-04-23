@@ -28,7 +28,8 @@
             e.examName as "examName",
             e. SUBJECT as "subject",
             p. NAME as "paperName",
-            s.score as "score"
+            s.score as "score",
+            e.beginTime as "beginTime"
         FROM
             score s
         LEFT JOIN USER u ON u.UserID = s.userId
@@ -49,7 +50,7 @@
                and u.classId= #{vo.classId}
             </if>
             <if test="vo.isStudent">
-               and u.UserID= #{userId}
+               and u.UserID= #{vo.userId}
             </if>
         
         </where>
@@ -184,7 +185,19 @@
                 AND p.PaperID = #{paperId}
             )
     </select>
-    
+    <select id="getPaperData" resultType="java.util.LinkedHashMap">
+    	SELECT
+    		e.examName as "examName",
+    		e.beginTime as "beginTime",
+    		e.endTime as "endTime",
+    		p.Score as "score",
+    		p.SelectScore as "selectScore",
+    		p.SAQScore as "saqScore"
+    	from examination e
+	    LEFT JOIN examinationpaper p on p.PaperID=e.paperId
+	    WHERE
+	    	e.examId = #{examId}
+    </select>
     
     
   </mapper>

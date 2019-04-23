@@ -76,7 +76,7 @@ public class AddExamVO {
 		exam.setSubject(vo.getSubject());
 		exam.setExamname(vo.getExamName());
 		exam.setBegintime(vo.getBeginTime());
-		exam.setCreateuser(CurrentUser.getCurrentUserCode()+"");
+		exam.setCreateuser(vo.getCreateUser());
 		exam.setEndtime(vo.getEndTime());
 		exam.setPaperid(vo.getPaperId());
 		exam.setStatus(ExamStatus.NOT_BEGIN.index);
