@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.oxy.dao.ext.ExtSAQMapper">
-  	<select id="listPage" parameterType="com.oxy.dto.itemBank.PageSaqDTO"
+  	<select id="listPage"
     	resultType="com.oxy.dto.itemBank.PageSaqDTO">
     	select 
         s.SAQID as saqid,
@@ -13,9 +13,25 @@
     	u.Name as createuser,
     	s.Answer as answer
     	From saq s
-        left  join user u on u.Name=s.CreateUser
+        left  join user u on u.UserCode=s.CreateUser
         
     	<where>
+    		<if test="param != null">
+    			<if test="param.paperId != null and param.paperId != '' ">
+    			AND	s.SAQID not in (
+					SELECT
+							SUBSTRING_INDEX(
+									SUBSTRING_INDEX(p.SAQIds,',',help_topic_id + 1),',' ,- 1)
+					FROM
+							mysql.help_topic,
+							examinationpaper p
+					WHERE
+							help_topic_id &lt; LENGTH(p.SAQIds) - LENGTH(REPLACE(p.SAQIds, ',', '')) + 1
+					AND p.PaperID = #{param.paperId}
+					)
+
+    			</if>
+    		</if>
     		<if test="param != null">
     			<if test="param.question != null and param.question != '' ">
     				<bind name="question" value="'%' + param.question + '%'"/>
@@ -37,7 +53,7 @@
     		<if test="param != null">
     			<if test="param.createuser != null and param.createuser != '' ">
     				<bind name="createuser" value="'%' + param.createuser + '%'"/>
-    				and CreateUser like #{createuser} 
+    				and u.Name like #{createuser} 
     			</if>
     		</if>
     	</where>

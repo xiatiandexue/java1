@@ -60,11 +60,10 @@ public class SAQServiceImpl implements SAQService {
 	@Override
 	public PageInfo<PageSaqDTO> page(PageSaqVO vo) {
 		PageHelper.startPage(vo.getPageNum(), vo.getPageSize());
-		PageSaqDTO dto = PageSaqDTO.builder().question(vo.getQuestion()).subject(vo.getSubject())
-				.chapter(vo.getChapter()).createuser(vo.getCreateuser()).build();
-		PageInfo<PageSaqDTO> pageInfo = new PageInfo<>(extSAQMapper.listPage(dto));
-		LOGGER.info("page(),resp{}", dto);
-		LOGGER.info("usercode", dto);
+//		PageSaqDTO dto = PageSaqDTO.builder().question(vo.getQuestion()).subject(vo.getSubject()).chapter(vo.getChapter()).createuser(vo.getCreateuser()).build();
+		PageInfo<PageSaqDTO> pageInfo = new PageInfo<>(extSAQMapper.listPage(vo));
+		LOGGER.info("page(),resp{}", vo);
+		LOGGER.info("usercode", vo);
 		return pageInfo;
 	}
 

@@ -119,7 +119,6 @@ public class PaperServiceImpl implements PaperService {
 			selectBegin = selectBegin + selectNext;
 		}
 		String questionids = Joiner.on(",").join(questionidlist);
-		// String questionids = questionidlist.toString();
 		System.out.println("单选题id:" + questionids);
 		// 抽取简答题
 		int saqBegin; // 简答题开始随机数
@@ -132,7 +131,6 @@ public class PaperServiceImpl implements PaperService {
 			saqBegin = saqBegin + saqNext;
 		}
 		String saqids = Joiner.on(",").join(saqidlist);
-		// String saqids = saqidlist.toString(",");
 		System.out.println("简答题id:" + saqids);
 		// 添加进数据库中
 		vo.setQuestionids(questionids);
@@ -178,15 +176,11 @@ public class PaperServiceImpl implements PaperService {
 	 */
 	@Override
 	public List<Singleselect> getSelectById(String questionids) {
-		// System.out.println(questionids);
 		String str[] = questionids.split(",");
 		List<String> questionIds = Arrays.asList(str);
-		// System.out.println(questionIds);
 		List<Singleselect> list = new ArrayList<>(questionIds.size());
-		// ArrayList list = new ArrayList(questionids);
 		for (int i = 0; i < questionIds.size(); i++) {
 			int questionid = Integer.parseInt(questionIds.get(i));
-			// System.out.println(questionid);
 			list.add(selectMapper.selectByPrimaryKey(questionid));
 		}
 		return list;
@@ -197,14 +191,11 @@ public class PaperServiceImpl implements PaperService {
 	 */
 	@Override
 	public List<SAQ> getSAQById(String saqids) {
-		// System.out.println(saqids);
 		String str[] = saqids.split(",");
 		List<String> saqIds = Arrays.asList(str);
-		// System.out.println(saqIds);
 		List<SAQ> list = new ArrayList<>(saqIds.size());
 		for (int i = 0; i < saqIds.size(); i++) {
 			int saqid = Integer.parseInt(saqIds.get(i));
-			// System.out.println(saqid);
 			list.add(saqMapper.selectByPrimaryKey(saqid));
 		}
 		return list;
@@ -220,13 +211,10 @@ public class PaperServiceImpl implements PaperService {
 		System.out.println("questionids:" + paper.getQuestionids());
 		String str[] = paper.getQuestionids().trim().split(",");
 		List<String> questionIds = new ArrayList<>(Arrays.asList(str));
-		// List<String> arrList = new ArrayList(questionIds);
 		String selectid = vo.getQuestionid() + "";
 		System.out.println("selectid:" + selectid);
 		System.out.println("questionIds：" + questionIds);
 		questionIds.removeIf(next -> {
-			// System.out.println(next);
-			// System.out.println(next.equals(selectid));
 			return next.equals(selectid);// No return statement will break
 											// compilation
 		});

@@ -21,7 +21,7 @@ public class JsonResult2 {
   /**
    * 结果消息，如果调用成功，消息通常为空
    */
-  private String msg;
+  private String message;
 
   /**
    * for JSON.parseObject(jsonString, JsonResult2.class)
@@ -32,21 +32,21 @@ public class JsonResult2 {
   /**
    * @param code 代码
    * @param data 结果
-   * @param msg 消息
+   * @param message 消息
    */
-  public JsonResult2(int code, Object data, String msg) {
+  public JsonResult2(int code, Object data, String message) {
     this.code = code;
     this.data = data;
-    this.msg = msg;
+    this.message = message;
   }
 
   /**
    * @param code 代码
-   * @param msg 消息
+   * @param message 消息
    */
-  public JsonResult2(int code, String msg) {
+  public JsonResult2(int code, String message) {
     this.code = code;
-    this.msg = msg;
+    this.message = message;
   }
 
   /**
@@ -70,14 +70,14 @@ public class JsonResult2 {
   }
 
   /**
-   * 请求成功方法 ，data返回值，msg提示信息
+   * 请求成功方法 ，data返回值，message提示信息
    */
-  public static JsonResult2 success(Object data, String msg) {
-    return new JsonResult2(0, data, msg);
+  public static JsonResult2 success(Object data, String message) {
+    return new JsonResult2(0, data, message);
   }
   
   /**
-   * 请求成功方法 ，data返回值，msg提示信息
+   * 请求成功方法 ，data返回值，message提示信息
    */
   public static JsonResult2 success(Object data, ResultType type) {
 	  return new JsonResult2(0, data, type.toString()+"成功");
@@ -86,8 +86,8 @@ public class JsonResult2 {
   /**
    * 请求失败消息
    */
-  public static JsonResult2 fail(String msg) {
-    return new JsonResult2(-2, null, Strings.isNullOrEmpty(msg) ? "" : msg);
+  public static JsonResult2 fail(String message) {
+    return new JsonResult2(-2, null, Strings.isNullOrEmpty(message) ? "" : message);
   }
 
  /**
@@ -109,8 +109,8 @@ public class JsonResult2 {
   /**
    * 非法请求消息
    */
-  public static JsonResult2 illegal(String msg) {
-    return new JsonResult2(-1, null, msg);
+  public static JsonResult2 illegal(String message) {
+    return new JsonResult2(-1, null, message);
   }
 
   public int getCode() {
@@ -129,11 +129,11 @@ public class JsonResult2 {
     this.data = data;
   }
 
-  public String getMsg() {
-    return msg;
+  public String getmessage() {
+    return message;
   }
 
-  public void setMsg(String msg) {
-    this.msg = msg;
+  public void setmessage(String message) {
+    this.message = message;
   }
 }

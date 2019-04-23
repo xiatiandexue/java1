@@ -17,9 +17,23 @@
     	s.Difficulty as difficulty,
     	u.Name as createuser
     	From singleselect s
-        left  join user u on u.Name=s.CreateUser
+        left  join user u on u.UserCode=s.CreateUser
     	<where>
     		<if test="param != null">
+    			<if test="param.paperId != null and param.paperId != '' ">
+    			AND	s.QuestionID not in (
+					SELECT
+							SUBSTRING_INDEX(
+									SUBSTRING_INDEX(p.QuestionIds,',',help_topic_id + 1),',' ,- 1)
+					FROM
+							mysql.help_topic,
+							examinationpaper p
+					WHERE
+							help_topic_id &lt; LENGTH(p.QuestionIds) - LENGTH(REPLACE(p.QuestionIds, ',', '')) + 1
+					AND p.PaperID = #{param.paperId}
+					)
+
+    			</if>
     			<if test="param.question != null and param.question != '' ">
     				<bind name="question" value="'%' + param.question + '%'"/>
     				and s.Question like #{question} 
@@ -34,7 +48,7 @@
     			</if>
     			<if test="param.createuser != null and param.createuser != '' ">
     				<bind name="createuser" value="'%' + param.createuser + '%'"/>
-    				and CreateUser like #{createuser} 
+    				and u.Name like #{createuser} 
     			</if>
     		</if>
     	</where>

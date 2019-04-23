@@ -35,10 +35,10 @@ public class SelectServiceImpl implements SelectService {
 	@Override
 	public PageInfo<PageSelectDTO> page(PageSelectVO vo) {
 		PageHelper.startPage(vo.getPageNum(), vo.getPageSize());
-		PageSelectDTO dto = PageSelectDTO.builder().question(vo.getQuestion()).subject(vo.getSubject())
-				.chapter(vo.getChapter()).createuser(vo.getCreateuser()).build();
-		System.out.println(dto);
-		PageInfo<PageSelectDTO> pageInfo = new PageInfo<>(extSelectMapper.listPage(dto));
+//		PageSelectDTO dto = PageSelectDTO.builder().question(vo.getQuestion()).subject(vo.getSubject())
+//				.chapter(vo.getChapter()).createuser(vo.getCreateuser()).build();
+//		System.out.println(dto);
+		PageInfo<PageSelectDTO> pageInfo = new PageInfo<>(extSelectMapper.listPage(vo));
 		return pageInfo;
 	}
 

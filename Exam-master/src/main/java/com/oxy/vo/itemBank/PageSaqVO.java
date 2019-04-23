@@ -8,6 +8,7 @@ public class PageSaqVO {
 	private String subject;
 	private String chapter;
 	private String createuser;
+	private Integer paperId;
 	private Integer pageNum;
 	private Integer pageSize;
 }

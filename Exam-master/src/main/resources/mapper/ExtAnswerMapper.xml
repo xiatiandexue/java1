@@ -60,6 +60,7 @@
         SELECT
             aq.SAQID as "questionId",
             aq.Question as "question",
+            aq.Difficulty as "difficulty",
             aq.Answer as "answer"
             <if test="analyze.toString()!='false'.toString">
                 ,
@@ -129,7 +130,8 @@
             aq.ChoiceTwo as "two",
             aq.ChoiceThree as "three",
             aq.ChoiceFour as "four",
-            aq.Answer as "answer"
+            aq.Answer as "answer",
+            aq.Difficulty as "difficulty"
             <if test="analyze.toString()!='false'.toString">
                 ,
             (
