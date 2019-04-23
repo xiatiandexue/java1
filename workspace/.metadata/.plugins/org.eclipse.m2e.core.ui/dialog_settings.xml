@@ -14,6 +14,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="E:\workspace\dj\trunk\wrs-service\pms"/>
 			<item value="E:\huawei\Exam-master"/>
 		</list>
 		<list key="projectNameTemplate">

@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.oxy.model.User"/>
+<fullyQualifiedTypeName name="org.apache.shiro.session.Session"/>
+<fullyQualifiedTypeName name="org.apache.shiro.SecurityUtils"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.apache.shiro.web.servlet.SimpleCookie"/>
+<fullyQualifiedTypeName name="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"/>
+</qualifiedTypeNameHistroy>
