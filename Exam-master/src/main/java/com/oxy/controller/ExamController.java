@@ -48,8 +48,9 @@ public class ExamController {
 	@GetMapping("/paper")
 	public JsonResult2 getPaperContent(@RequestParam(value = "examId", required = true) Integer examId,
 			@RequestParam(value = "paperId", required = true) Integer paperId,
-			@RequestParam(value = "isAnalyze", required = true) boolean isAnalyze) {
-		Map<String, Object> map = examService.getPaperContent(examId,paperId, isAnalyze);
+			@RequestParam(value = "isAnalyze", required = true) boolean isAnalyze,
+			@RequestParam(value = "userId", required = false) Integer userId) {
+		Map<String, Object> map = examService.getPaperContent(examId,paperId, isAnalyze, userId);
 		return JsonResult2.success(map);
 	}
 

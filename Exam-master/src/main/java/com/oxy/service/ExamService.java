@@ -22,7 +22,7 @@ public interface ExamService {
 
 	List<LinkedHashMap<String, Object>> getGradePage(PageGradeVO vo, boolean isPage);
 
-	Map<String, Object> getPaperContent(Integer examId, Integer paperId, boolean isAnalyze);
+	Map<String, Object> getPaperContent(Integer examId, Integer paperId, boolean isAnalyze, Integer userId);
 	
 	
 

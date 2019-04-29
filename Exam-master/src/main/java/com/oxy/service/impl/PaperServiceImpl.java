@@ -85,6 +85,7 @@ public class PaperServiceImpl implements PaperService {
 		int selectCount = vo.getTotalselect(); // 要抽取的单选题数量
 		int saqCount = vo.getTotalsaq(); // 要抽取的简答题数量
 		List<Singleselect> selectList = getSelect(vo.getSubject()); // 单选题list
+		System.out.println(selectList);
 		List<SAQ> saqList = getSaq(vo.getSubject()); // 简答题list
 		int allSelectCount = selectList.size(); // 单选题总数
 		int allSaqCount = saqList.size(); // 简答题总数
@@ -109,7 +110,7 @@ public class PaperServiceImpl implements PaperService {
 		// 随机抽取题目
 		// 抽取单选题
 		int selectBegin; // 单选题开始随机数
-		selectBegin = new Random().nextInt(2);
+		selectBegin = new Random().nextInt(10);
 		System.out.println("单选题开始随机数：" + selectBegin);
 		int selectNext; // 单选题递增数
 		selectNext = (allSelectCount - selectBegin) / selectCount;

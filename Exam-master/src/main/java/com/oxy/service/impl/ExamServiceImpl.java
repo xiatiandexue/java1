@@ -190,13 +190,13 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public Map<String, Object> getPaperContent(Integer examId, Integer paperId, boolean isAnalyze) {
+	public Map<String, Object> getPaperContent(Integer examId, Integer paperId, boolean isAnalyze, Integer userId) {
 		Map<String, Object> map = new HashMap<>();
 		//获取saq
-		List<LinkedHashMap<String, Object>> saqList = extAnswerMapper.getSAQList(examId,paperId,isAnalyze,QuestionType.SAQ.index);
+		List<LinkedHashMap<String, Object>> saqList = extAnswerMapper.getSAQList(examId,paperId,isAnalyze,QuestionType.SAQ.index,userId);
 		map.put("saq", saqList);
 		//获取single
-		List<LinkedHashMap<String, Object>> singleList = extAnswerMapper.getSingleList(examId,paperId,isAnalyze,QuestionType.SINGLE.index);
+		List<LinkedHashMap<String, Object>> singleList = extAnswerMapper.getSingleList(examId,paperId,isAnalyze,QuestionType.SINGLE.index,userId);
 		map.put("single", singleList);
 		LinkedHashMap<String, Object> paperData = extAnswerMapper.getPaperData(examId, paperId);
 		map.put("paperData", paperData);

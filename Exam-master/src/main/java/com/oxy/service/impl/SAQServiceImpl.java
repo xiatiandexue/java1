@@ -141,7 +141,7 @@ public class SAQServiceImpl implements SAQService {
 				}
 
 				// 批量插入
-				extSingleMapper.addSingleList(singleList, CurrentUser.getCurrentUserName() + "");
+				extSingleMapper.addSingleList(singleList, CurrentUser.getCurrentUserCode() + "");
 
 			}
 			if (Objects.equal(vo.getType(), QuestionType.SAQ.index)) {
@@ -162,7 +162,7 @@ public class SAQServiceImpl implements SAQService {
 				}
 				User u=CurrentUser.getCurrentUser();
 				// 批量插入
-				extSAQMapper.addSaqList(saqList, CurrentUser.getCurrentUserName() + "");
+				extSAQMapper.addSaqList(saqList, CurrentUser.getCurrentUserCode() + "");
 			}
 			if (Objects.equal(vo.getType(), QuestionType.STUDENT.index)) {
 				AssertApp.notNull(vo.getClassId(), "班级不能为空");

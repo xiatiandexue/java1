@@ -62,6 +62,23 @@
             aq.Question as "question",
             aq.Difficulty as "difficulty",
             aq.Answer as "answer"
+            
+            <if test="userId != null and userId != '' ">
+            	,
+            	(
+            		SELECT
+            			u.userAnswer
+            		FROM 
+            			User_Answer u
+            		WHERE
+            			u.QuestionId = aq.SAQID
+            			and u.userId = #{userId}
+		        		and u.examId = #{examId}
+		        		and u.paperId = #{paperId}
+		        		and u.type = #{type}
+            	)AS "userAnswer"
+        		
+        	</if>
             <if test="analyze.toString()!='false'.toString">
                 ,
             (
@@ -104,8 +121,8 @@
             
         FROM
             saq aq
-        WHERE
-            aq.SAQID IN (
+        <where>
+         	aq.SAQID IN (
                 SELECT
                     SUBSTRING_INDEX(
                         SUBSTRING_INDEX(p.SAQIds,',',help_topic_id + 1),',' ,- 1)
@@ -116,6 +133,8 @@
                     help_topic_id &lt; LENGTH(p.SAQIds) - LENGTH(REPLACE(p.SAQIds, ',', '')) + 1
                 AND p.PaperID = #{paperId}
             )
+        	
+        </where>
     </select>
     
     
@@ -132,6 +151,22 @@
             aq.ChoiceFour as "four",
             aq.Answer as "answer",
             aq.Difficulty as "difficulty"
+            <if test="userId != null and userId != '' ">
+            	,
+            	(
+            		SELECT
+            			u.userAnswer
+            		FROM 
+            			User_Answer u
+            		WHERE
+            			u.QuestionId = aq.QuestionID
+            			and u.userId = #{userId}
+		        		and u.examId = #{examId}
+		        		and u.paperId = #{paperId}
+		        		and u.type = #{type}
+            	)AS "userAnswer"
+        		
+        	</if>
             <if test="analyze.toString()!='false'.toString">
                 ,
             (
@@ -174,8 +209,8 @@
             
         FROM
             singleselect aq
-        WHERE
-            aq.QuestionID IN (
+        <where>
+        	and aq.QuestionID IN (
                 SELECT
                     SUBSTRING_INDEX(
                         SUBSTRING_INDEX(p.QuestionIds,',',help_topic_id + 1),',' ,- 1)
@@ -186,6 +221,7 @@
                     help_topic_id &lt; LENGTH(p.QuestionIds) - LENGTH(REPLACE(p.QuestionIds, ',', '')) + 1
                 AND p.PaperID = #{paperId}
             )
+        </where>
     </select>
     <select id="getPaperData" resultType="java.util.LinkedHashMap">
     	SELECT

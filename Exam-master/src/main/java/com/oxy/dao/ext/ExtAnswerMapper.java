@@ -19,10 +19,10 @@ public interface ExtAnswerMapper {
 	List<LinkedHashMap<String, Object>> getScoreList(@Param("vo")PageGradeVO vo);
 
 	List<LinkedHashMap<String, Object>> getSAQList(@Param("examId")Integer examId, @Param("paperId")Integer paperId,
-			@Param("analyze")boolean isAnalyze, @Param("type")String index);
+			@Param("analyze")boolean isAnalyze, @Param("type")String index, @Param("userId")Integer userId);
 	
 	List<LinkedHashMap<String, Object>> getSingleList(@Param("examId")Integer examId, @Param("paperId")Integer paperId,
-			@Param("analyze")boolean isAnalyze, @Param("type")String index);
+			@Param("analyze")boolean isAnalyze, @Param("type")String index, @Param("userId")Integer userId);
 	LinkedHashMap<String, Object> getPaperData(@Param("examId")Integer examId, @Param("paperId")Integer paperId);
 
 }
