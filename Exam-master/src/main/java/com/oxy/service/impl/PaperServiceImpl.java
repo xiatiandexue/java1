@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
-import com.oxy.config.CurrentUser;
 import com.oxy.dao.ExaminationPaperMapper;
 import com.oxy.dao.SAQMapper;
 import com.oxy.dao.SingleselectMapper;
@@ -85,33 +83,31 @@ public class PaperServiceImpl implements PaperService {
 		int selectCount = vo.getTotalselect(); // 要抽取的单选题数量
 		int saqCount = vo.getTotalsaq(); // 要抽取的简答题数量
 		List<Singleselect> selectList = getSelect(vo.getSubject()); // 单选题list
-		System.out.println(selectList);
 		List<SAQ> saqList = getSaq(vo.getSubject()); // 简答题list
 		int allSelectCount = selectList.size(); // 单选题总数
 		int allSaqCount = saqList.size(); // 简答题总数
+		if (allSelectCount < selectCount) {
+			throw new ServiceOperationException(-2, "题库题目数量不足以组卷");
+		}
+		if (allSaqCount < saqCount) {
+			throw new ServiceOperationException(-2, "题库题目数量不足以组卷");
+		}
 		// 取单选题id列表
-		User u=CurrentUser.getCurrentUser();
 		List<Integer> questionTemp = new ArrayList<Integer>();
 		for (int i = 0; i < selectList.size(); i++) { // 取通过章节排序后的单选题题目id
 			questionTemp.add(selectList.get(i).getQuestionid());
 		}
-		if (questionTemp.size() < selectCount) {
-			throw new ServiceOperationException(-2, "题库题目数量不足以组卷");
-		}
-		System.out.println("单选题临时列表：" + questionTemp);
 		// 取简答题id列表
 		List<Integer> saqTemp = new ArrayList<Integer>();
 		for (int i = 0; i < saqList.size(); i++) { // 取通过章节排序后的简答题题目id
 			saqTemp.add(saqList.get(i).getSaqid());
 		}
-		if (saqTemp.size() < saqCount) {
-			throw new ServiceOperationException(-2, "题库题目数量不足以组卷");
-		}
+		System.out.println(questionTemp);
+		System.out.println(saqTemp);
 		// 随机抽取题目
 		// 抽取单选题
 		int selectBegin; // 单选题开始随机数
 		selectBegin = new Random().nextInt(10);
-		System.out.println("单选题开始随机数：" + selectBegin);
 		int selectNext; // 单选题递增数
 		selectNext = (allSelectCount - selectBegin) / selectCount;
 		List<Integer> questionidlist = new ArrayList<Integer>();
@@ -120,10 +116,9 @@ public class PaperServiceImpl implements PaperService {
 			selectBegin = selectBegin + selectNext;
 		}
 		String questionids = Joiner.on(",").join(questionidlist);
-		System.out.println("单选题id:" + questionids);
 		// 抽取简答题
 		int saqBegin; // 简答题开始随机数
-		saqBegin = new Random().nextInt(1);
+		saqBegin = new Random().nextInt(10);
 		int saqNext;
 		saqNext = (allSaqCount - saqBegin) / saqCount;
 		List<Integer> saqidlist = new ArrayList<Integer>();
@@ -132,7 +127,6 @@ public class PaperServiceImpl implements PaperService {
 			saqBegin = saqBegin + saqNext;
 		}
 		String saqids = Joiner.on(",").join(saqidlist);
-		System.out.println("简答题id:" + saqids);
 		// 添加进数据库中
 		vo.setQuestionids(questionids);
 		vo.setSaqids(saqids);
@@ -234,18 +228,13 @@ public class PaperServiceImpl implements PaperService {
 	@Transactional
 	public void deleteSAQ(SAQIdVO vo) {
 		ExaminationPaper paper = selectById(vo.getPaperid());
-		System.out.println("saqids:" + paper.getSaqids());
 		String str[] = paper.getSaqids().trim().split(",");
 		List<String> saqIds = new ArrayList<>(Arrays.asList(str));
-		// List<String> arrList = new ArrayList(questionIds);
 		String saqid = vo.getSaqid() + "";
-		System.out.println("saqid:" + saqid);
-		System.out.println("saqIds：" + saqIds);
 		saqIds.removeIf(next -> {
 			return next.equals(saqid);// No return statement will break
 										// compilation
 		});
-		System.out.println("删除后的简答题id：" + saqIds);
 		String saqids = Joiner.on(",").join(saqIds);
 		paper.setSaqids(saqids);
 		paper.setSaqnum(saqIds.size());
@@ -259,14 +248,10 @@ public class PaperServiceImpl implements PaperService {
 	@Transactional
 	public void addSelect(SelectIdVO vo) {
 		ExaminationPaper paper = selectById(vo.getPaperid());
-		System.out.println("questionids:" + paper.getQuestionids());
 		String str[] = paper.getQuestionids().trim().split(",");
 		List<String> questionIds = new ArrayList<>(Arrays.asList(str));
 		String selectid = vo.getQuestionid() + "";
-		System.out.println("selectid:" + selectid);
-		System.out.println("questionIds：" + questionIds);
 		questionIds.add(selectid);
-		System.out.println("添加后的选择题id：" + questionIds);
 		String questionids = Joiner.on(",").join(questionIds);
 		paper.setQuestionids(questionids);
 		paper.setSelectnum(questionIds.size());

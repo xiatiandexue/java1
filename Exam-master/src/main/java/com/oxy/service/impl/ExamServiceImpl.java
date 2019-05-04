@@ -81,7 +81,6 @@ public class ExamServiceImpl implements ExamService {
 			answer.setAnswer(ans.getAnswer());
 			answer.setIscorrrent(Objects.equal(ans.getAnswer(), ans.getUserAnswer()) ? true : false);
 			answer.setUserid(vo.getUserId());
-			System.out.println(CurrentUser.getCurrentUserCode());
 			if (Objects.equal(ans.getAnswer(), ans.getUserAnswer())) {
 				if (QuestionType.SAQ.index.equals(ans.getType())) {
 					saqSum += ans.getValue();

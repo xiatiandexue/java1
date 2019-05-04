@@ -183,7 +183,6 @@ public class SAQServiceImpl implements SAQService {
 				}
 				// 批量插入user表
 				extUserMapper.addUserList(userList);
-				// 批量插入班级-学生表
 			}
 		} catch (IOException e) {
 			LOGGER.info("读取模板文件发生异常,{}", e);
